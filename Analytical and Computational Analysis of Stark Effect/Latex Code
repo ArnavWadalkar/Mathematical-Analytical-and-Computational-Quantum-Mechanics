@@ -1,0 +1,354 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{fancyhdr}
+\geometry{margin=1in}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+\pagestyle{fancy}
+\lhead{The Stark effect in the Hydrogen Atom}
+\rhead{Arnav Wadalkar | NIT Rourkela}
+
+\section*{The Stark effect in the Hydrogen Atom}
+We know $H_0$ for the unperturbed Hydrogen atom;
+\[
+H_0 = -\frac{\hbar^2}{2m} \nabla^2 + U(r)
+\]
+where:
+\[
+U(r) = 
+\begin{cases} 
+-\frac{Ze^2}{R} \left[ \frac{3}{2} - \frac{1}{2} (\frac{r}{R})^2 \right] & ; r \le R \\
+-\frac{Ze^2}{r} & ; r > R
+\end{cases}
+\]
+\\
+\noindent Suppose we introduce a constant external electric field $\vec{E}$:
+\[
+\vec{E} = E \hat{e}_3 \quad ; \quad H_1 = -\vec{d} \cdot \vec{E} = -d_3 E
+\]
+\noindent where $H_1$ corresponds to the dipole moment of the atom.
+\\
+
+\noindent Stark effect: Shifting and splitting of spectral lines of atoms and molecules due to the presence of an external electric field $\vec{E}$.
+\[
+ H_1 = -d_3 E = ezE = e(r\cos\theta)E
+\]
+\noindent\textbf{Dipole operator and basis vectors}
+
+\noindent In spherical polar coordinates:
+\begin{align*}
+    (x + iy) &= r \sin\theta (\cos\phi + i\sin\phi) = r \sin\theta e^{i\phi} \\
+    (x - iy) &= r \sin\theta e^{-i\phi}
+\end{align*}
+
+\noindent We know;
+\[
+Y_{1,0} = \sqrt{\frac{3}{4\pi}} \cos\theta \quad \quad Y_{1, \pm 1} = \mp \sqrt{\frac{3}{8\pi}} \sin\theta e^{\pm i\phi}
+\]
+
+\[
+z = r \cos\theta = r \sqrt{\frac{4\pi}{3}} Y_{1,0} \quad \quad (\mu = 0)
+\]
+
+\noindent $\therefore$ For x, y directions$ (\mu = \pm 1)$
+\[
+r \sin\theta e^{\pm i\phi} = \mp r \sqrt{\frac{8\pi}{3}} Y_{1, \pm 1}
+\]
+\noindent The dipole operator $\vec{d} = -e\vec{r}$ corresponds to:
+\[
+d_0 = d_z = -ez = -e \left( r \sqrt{\frac{4\pi}{3}} Y_{1,0} \right)
+\]
+\[
+d_{\pm} = \mp \frac{dx \pm i dy}{\sqrt{2}} \implies d_{\pm} = \pm \mp \frac{e}{\sqrt{2}} (x \pm iy)
+\]
+\\
+\[
+d_{\pm} = \pm \frac{e}{\sqrt{2}} \left( \mp r \sqrt{\frac{8\pi}{3}} Y_{1, \pm 1} \right) \implies d_{\pm} = - e r \sqrt{\frac{4\pi}{3}} Y_{1, \pm 1}
+\]
+\[
+\therefore d_\mu = -e \sqrt{\frac{4\pi}{3}} r Y_{1, \mu} \quad ; \quad \mu = -1, 0, 1
+\]
+\\
+\noindent We define the Spherical basis vectors: \quad $\hat{e}_{\pm 1} = \mp \frac{\hat{e}_x \pm i \hat{e}_y}{\sqrt{2}} \quad ; \quad \hat{e}_0 = \hat{e}_z$
+
+\[
+\therefore E_\mu = \vec{E} \cdot \hat{e}_\mu^*
+\]
+
+\[
+E_{+1} = -\frac{1}{\sqrt{2}} (E_x + i E_y) \qquad E_{-1} = \frac{1}{\sqrt{2}} (E_x - i E_y) \qquad E_0 = E_z
+\]
+
+\[
+\vec{d} \cdot \vec{E} = \sum_\mu d_\mu^* E_\mu = d_0^* E_0 + d_{-1}^* E_{-1} + d_{+1}^* E_{+1} = d_x E_x + d_y E_y + d_z E_z
+\]
+\noindent The electric field induces a dipole moment by polarizing the cloud, then interacts with the induced moments.
+
+\vspace{1em}
+
+\noindent \textbf{Quadratic Stark effect for Non-degenerate Hydrogen-like atoms)}
+
+\noindent The first order approximation gives;
+\[
+\langle nlm \mid H_1 \mid n'l'm' \rangle = E^{(1)} = 0
+\]
+by parity.
+\\
+\\
+\noindent  \textbf{Selection rule (Parity)}: Under spatial inversion $(r \to -r)$
+\[
+\psi(-r) = (-1)^l \psi(r)
+\]
+\[
+\therefore |\psi(-r)|^2 = |\psi(r)|^2 \quad (\text{even})
+\]
+\\
+\noindent  However $d(-r) = -d(r) \implies H_1(-r) = -H_1(r) \quad (\text{odd})$
+
+\[
+\therefore \langle \psi_a \mid H_1 \mid \psi_a \rangle = \int \text{even} \times \text{odd} \times \text{even} = 0
+\]
+\noindent  \textit{First order approximation is hence zero.}
+\[
+E^{(1)} = \langle nlm \mid H_1 \mid nlm \rangle = 0
+\]
+\noindent No linear Stark effect for non-degenerate states.
+\\
+\\
+\noindent \textit{The second-order perturbation is:}
+\[
+\Delta E^{(2)} = \sum_{nlm \neq n'l'm'} \frac{\langle nlm \mid H_1 \mid n'l'm' \rangle \langle n'l'm' \mid H_1 \mid nlm \rangle}{E_{nl} - E_{n'l'}}
+\]
+
+\noindent  Applying the previous expansion of our perturbed Hamiltonian:
+
+\[
+\Delta E^{(2)} = \sum_{nl} \sum_{\mu \nu} E_\mu E_\nu^* \sum_m \frac{\langle nlm \mid d_\nu \mid n'l'm' \rangle \langle n'l'm' \mid d_\mu^* \mid nlm \rangle}{E_{nl} - E_{n'l'}}
+\]
+
+\noindent Due to angular momentum conservation, matrix elements involving $d_\nu$ and $d_\mu^*$ are non-zero iff the indices match.
+
+\[
+\Delta E^{(2)} = \sum_{n,l} \sum_{\mu} E_\mu E_\mu^* \sum_m \frac{|\langle nlm \mid d_\mu \mid n'l'm' \rangle|^2}{E_{nl} - E_{n'l'}}
+\]
+
+\[
+\Delta E^{(2)} = \frac{E^2}{3} \times \sum_{nlm} \frac{|\langle nlm \mid \vec{d} \mid n'l'm' \rangle|^2}{E_{nl} - E_{n'l'}}
+\]
+\noindent  where $\vec{d} = \sum_\mu d_\mu$
+
+\[
+\Delta E^{(2)} = -\frac{1}{2} \alpha E^2 \quad ; \quad \alpha = -\frac{2}{3} \sum_{nlm} \frac{|\langle nlm \mid \vec{d} \mid n'l'm' \rangle|^2}{\underbrace{E_{nl} - E_{n'l'}}_{\text{always negative}}}
+\]
+
+\[
+\therefore \alpha \implies \text{always +ve}
+\]
+\noindent  \textbf{Angular momentum conservation ($\mu = \nu$)}
+
+\[
+Y_l^m (\theta, \phi) = P_l^m (\cos\theta) \cdot e^{im\phi}
+\]
+
+\[
+\langle n l m \mid d_\nu \mid n' l' m' \rangle \propto \int_0^{2\pi}\int_0^{\pi} (Y_l^m)^* (Y_1^\nu) (Y_{l'}^{m'}) \sin\theta d\theta d\phi
+\]
+
+\[
+= \int_0^{2\pi} (e^{im\phi})^* (e^{i\nu\phi}) (e^{im'\phi}) d\phi \int_0^{\pi} (P_l^m(\cos\theta))^* P_1^\nu (\cos\theta) P_{l'}^{m'} (\cos\theta) \sin\theta d\theta d\phi
+\]
+\[
+\underbrace{e^{i(-m + \nu + m')\phi}}_{\Downarrow}
+\]
+\[
+\therefore m = m' + \nu
+\]
+
+\noindent  Similarly, you define $d_\mu^* \implies m = m' + \mu$
+\[
+\therefore \mu = \nu
+\]
+
+\noindent  The atom starts is state $m$, to get to a state $m'$, it interacts with a field component carrying angular momentum $\nu$.
+\\
+\\
+\noindent  The second-order energy correction describes a virtual process
+\[
+m \to m' \to m' \to m
+\]
+\[
+\langle n l m \mid H_1 \mid n' l' m' \rangle \langle n' l' m' \mid H_1 \mid n l m \rangle
+\]
+\noindent  To get back to the original state, the atom must interact with the field component in the exact reverse manner.
+\[
+\therefore -\mu \implies -\nu \implies \mu = \nu
+\]
+\noindent The external electric field $E$ exerts a force on the electron, distorting it. This creates an induced dipole moment $d_{ind}$.
+\[
+d_{ind} = \alpha E
+\]
+\[
+\therefore E \simeq -d_{ind} \cdot \vec{E} = -(\alpha E) \cdot \vec{E} = -\alpha E^2
+\]
+
+\noindent The electric field relaxes the system by allowing the electron to shift into a more favorable position (polarization), effectively binding it slightly tighter in the direction of the field.
+
+\vspace{1em}
+\noindent When the electric field turns on:-
+
+\noindent 1) Elastic cost
+\noindent The field pulls the electron away from the nucleus, Modelled like a spring
+\[
+U_{elastic} = \frac{1}{2} k x^2
+\]
+\noindent 2) Interaction gain
+\noindent As the $e^-$ move a distance $x$ in the direction opposite to the field, it creates a dipole $\vec{d} = -e\vec{x}$
+\[
+U_{interaction} = -\vec{d} \cdot \vec{E} = -(ex) E
+\]
+\[
+\therefore E_{total} = \frac{1}{2} k x^2 - exE
+\]
+\\
+\\
+\noindent For force balance:
+\[
+e x = \frac{k x^2}{E}
+\]
+\[
+E_{total} = -\frac{1}{2} exE \implies \text{system pays energy to strecth}
+\]
+\\
+\noindent \textbf{Linear Stark Effect for the Degenerate n=2 Hydrogen atom}
+
+\noindent For $n=2$, we have the following bases:-
+\begin{align*}
+    |1\rangle &= |2s, 0\rangle \quad \text{Parity even} \\
+    |2\rangle &= |2p, 0\rangle \quad \text{Parity odd} \\
+    |3\rangle &= |2p, +1\rangle \quad \text{Parity odd} \\
+    |4\rangle &= |2p, -1\rangle \quad \text{Parity odd}
+\end{align*}
+We define the Perturbation matrix $W_{ij}$
+\begin{align*}
+    W &= \langle i | H_1 | j \rangle = \langle i | ezE | j \rangle = E \cdot e \langle i | z | j \rangle \implies 4 \times 4 \text{ matrix}
+\end{align*} 
+\noindent for diagonal elements $i=j$, the integral is $|\psi|^2(\text{even})* z(\text{odd})$ is odd.
+\\
+\\
+\noindent  $\therefore$ All diagonal elements are zero. Hence, no first-order shift is an isolated state.
+
+\noindent The operator $Z$ cannot change the angular momentum along $z$
+\[
+\therefore \quad [Z, L_z] = 0 \quad \implies \quad \Delta m = 0
+\]
+\noindent This constraint restricts the system from changing the quantum number $m$ during interactions, implying any state with 3, 4 in them are zero since:
+
+\[m = +1 \implies |3\rangle \quad m = -1 \implies |4\rangle]\
+
+
+\noindent $\therefore$ The only non-zero terms are the states with the same $m$ but opposite parity, $|2s\rangle$ and $|2p\rangle$ with $m=0$. Specifically $\Delta_{12}$ and $\Delta_{21}$
+\begin{align*}
+    \Delta_{12} &= \langle 2s, 0 \mid H_1 \mid 2p, 0 \rangle  \\
+\end{align*}
+\noindent  $\therefore$ Our $4 \times 4$ matrix is now effectively $2 \times 2$
+
+\[
+\begin{pmatrix}
+0 & \Delta_{12} \\
+\Delta_{21} & 0
+\end{pmatrix} \implies \text{off diagonal terms [tunneling]} \quad [2s, 2p \text{ are bad labels}]
+\]
+\\
+
+\noindent To calculate the matrix term, start by defining 
+\[H_1 = -\vec{d} \cdot \vec{E} = -(-ez)E = ezE\]
+\[
+\langle 1 \mid H_1 \mid 2 \rangle = \langle 2 \mid H_1 \mid 1 \rangle = -e \sqrt{\frac{4\pi}{3}} E \langle 2s, m=0 \mid r Y_{10} \mid 2p, m=0 \rangle
+\]
+
+\[
+H_{12} = \int \psi_{2s}^* (ezE) \psi_{2p} d\tau = eE \int \psi_{2s}^* z \psi_{2p} d\tau
+\]
+\[
+= eE \int \psi_{2s}^* (r \cos\theta) \psi_{2p} (r^2 \sin\theta dr d\theta d\phi)
+\]
+\\
+We know;
+\[\psi_{2s} = Y_{00} = \frac{1}{\sqrt{4\pi}} ; \ \text{and } \\
+\psi_{2p} = Y_{1,0} = \sqrt{\frac{3}{4\pi}} \cos\theta\]
+
+\[
+I_{ang} = \int_0^{2\pi} d\phi \int_0^{\pi} \sin\theta d\theta \left( \frac{1}{\sqrt{4\pi}} \right) \cos\theta \left( \sqrt{\frac{3}{4\pi}} \cos\theta \right)
+\]
+
+\[
+I_{ang} = \frac{1}{\sqrt{3}}
+\]
+
+\noindent The radial wavefunction for 2s and 2p states are:
+
+\[
+R_{2s}(r) = \frac{1}{\sqrt{8} a_0^{3/2}} \left( 2 - \frac{r}{a_0} \right) e^{-r/2a_0}
+\]
+\[
+R_{2p}(r) = \frac{1}{\sqrt{24} a_0^{3/2}} \left( \frac{r}{a_0} \right) e^{-r/2a_0}
+\]
+
+\[
+\int_0^\infty R_{2s} R_{2p} \cdot r^3 dr = N \int_0^\infty [2-x][x] [a_0 x]^3 (a_0 dx) e^{-x}
+\]
+\[
+\text{where } x = \frac{r}{a_0} \quad , \quad N = \frac{1}{8\sqrt{3} a_0^3}
+\]
+
+\noindent Solving ; we get : $I_{rad} = -3\sqrt{3} a_0$
+
+\[
+\therefore \quad H_{12} = e E \cdot  \ (I_{ang}) (I_{rad})
+\]
+\[
+H_{12} = -3 e a_0 E
+\]
+\noindent $\therefore $ We have the matrix elements, $\Delta_{12} = \Delta_{21} = -3ea_0 E$
+\noindent The nonzero result comes because the $2s$ wavefunction overlaps differently with the positive and negative lobes of the $2p$ wavefunction when weighted by $z$. 
+\\
+\\
+\noindent Diagonalizing: Rotating our matrix to find the "Hybrid states" where the flipping stops.
+\[
+\psi_{\pm} = \frac{1}{\sqrt{2}} (|2s\rangle \pm |2p\rangle) = \frac{1}{\sqrt{2}} (|1\rangle \pm |2\rangle)
+\]
+
+\noindent  Linearity signifies that the atom in its new hybrid state acts like a permanent electric dipole. Since $2s$ and $2p$ have the same energy, the electric field can easily mix them, the new wavefunction being:-
+\[
+\psi_{\pm} = \frac{1}{\sqrt{2}} ( |2s\rangle \pm |2p\rangle )
+\]
+
+\noindent  $\therefore$ Solving for eigenvalues $\implies \det(W - \lambda I) \implies \lambda = \pm \Delta_{12}$
+
+\[
+\therefore E_{1,2}^{(1)} = \pm 3 e a_0 E
+\]
+\noindent  If $W_{ij}$ a non-zero $\implies$ perturbation acts like a tunnel, it allows $e^-$ to flow back and forth between $2s$ and $2p$. The 'tunneling' creates a hybrid superposition.
+\\
+\\
+\noindent  If $W_{ii}$ is non-zero: perturbation pushes the energy up or down without changing the shape.
+\\
+\\
+\noindent \textbf{Remarks}
+\\
+\\
+ \noindent \textbf{1. Tunneling}: When we observe our dipole at the limit $z \to - \infty $ . Considering the Coulomb potential, it creates a barrier of finite width.  Hence, our Hamiltonian describes a system where the electrons aren't bounded, allowing quantum tunneling leading to ionization of the Hydrogen Atom.
+
+\noindent  The stationary states developed via perturbation theory correspond to metastable states with a finite lifetime. The reason perturbation theory is a valid approximation is that for weak fields, the probability of tunneling is exponentially small, making the lifetime long enough to treat the state as stationary.
+
+\noindent \textbf{2. Laplace-Runga-Lenz Vector:} In our analytical work, we have used spherical coordinates since its efficient for calculations of lower perturbations. However, the problem of the Stark effect in the Hydrogen atom is exactly separable if one uses Parabolic coordinates. This separation is possible due to the $SO(4)$ symmetry of the Hydrogen atom related to the Laplace-Runge-Lenz vector.
+
+\noindent \textbf{3. Lamb Shift:} In our analytical work, we have assumed perfect degeneracy between the $l$ states. Therefore, the Linear Stark effect is only observed in the Strong Field Limit, where the Stark interaction energy is much larger than the Lamb shift. For weak fields, the states remain non-degenerate; the effect is Quadratic.
+
+\end{document}
