@@ -33,15 +33,15 @@ The electric field mixes $|2s\rangle$ and $|2p,0\rangle$, lifting the degeneracy
 * **Charge Asymmetry:** The electron cloud shifts, creating a permanent dipole shape (the "egg" shape).
 
 <p align="center">
-  <img src="Mathematical-Analytical-and-Computational-Quantum-Mechanics/Analytical and Computational Analysis of Stark Effect/plots/linearstarksplitting.png" width="600" alt="Linear Splitting Graph">
-</p>
- 
-<p align="center">
-  <img src="Mathematical-Analytical-and-Computational-Quantum-Mechanics/Analytical and Computational Analysis of Stark Effect/plots/polarizationagainst.png" width="600" alt="Hybrid Orbital against field">
+  <img src="Analytical and Computational Analysis of Stark Effect/plots/linearstarksplitting.png" width="600" alt="Linear Splitting Graph">
 </p>
 
 <p align="center">
-  <img src="Mathematical-Analytical-and-Computational-Quantum-Mechanics/Analytical and Computational Analysis of Stark Effect/plots/polarizationwith.png" width="600" alt="Hybrid Orbital with field">
+  <img src="Analytical and Computational Analysis of Stark Effect/plots/polarizationagainst.png" width="600" alt="Hybrid Orbital against field">
+</p>
+
+<p align="center">
+  <img src="Analytical and Computational Analysis of Stark Effect/plots/polarizationwith.png" width="600" alt="Hybrid Orbital with field">
 </p>
 
 ---
@@ -63,8 +63,8 @@ In `Quadratic_Stark.ipynb`, we computed the Stark coefficient by summing over bo
 * **Computed Coefficient:** $\approx -1.83$
 * **Error:** ~18.6%
 
-  <p align="center">
-  <img src="Mathematical-Analytical-and-Computational-Quantum-Mechanics/Analytical and Computational Analysis of Stark Effect/plots/coefferror.png" width="600" alt="Coefficient discrepancy">
+<p align="center">
+  <img src="Analytical and Computational Analysis of Stark Effect/plots/coefferror.png" width="600" alt="Coefficient discrepancy">
 </p>
 
 This discrepancy is **not** a calculation error. It represents the contribution of the **Continuum States** (unbound electrons). The sum over discrete bound states saturates at ~81%, proving that the continuum is physically required to complete the basis set.
