@@ -25,18 +25,18 @@ Based on the derivations in `Analytical_solution.pdf`:
 
 ## 2. Linear Stark Effect ($n=2$)
 For the $n=2$ shell of Hydrogen, we have 4 states: $|2s,0\rangle, |2p,0\rangle, |2p,\pm 1\rangle$.
-The electric field mixes $|2s\rangle$ and $|2p,0\rangle$, lifting the degeneracy for strong field approximation.
+The electric field mixes $|2s\rangle$ and $|2p,0\rangle$, lifting the degeneracy for the strong field approximation.
 
 ### Key Results:
 * **Energy Splitting:** The energy levels split linearly as $E^{(1)} = \pm 3 e a_0 E$.
 * **Hybridization:** The new eigenstates are superpositions $\psi_{\pm} = \frac{1}{\sqrt{2}}(|2s\rangle \pm |2p\rangle)$.
 * **Charge Asymmetry:** The electron cloud shifts, creating a permanent dipole shape (the "egg" shape).
 
-`![Linear Splitting](plots/linearstarksplitting.png)`
+`![Linear Splitting](Analytical%20and%20Computational%20Analysis%20of%20Stark%20Effect/plots/linearstarksplitting.png)`
 
-`![Hybrid Orbital against field](plots/polarizationagainst.png)`
+`![Hybrid Orbital against field](Analytical%20and%20Computational%20Analysis%20of%20Stark%20Effect/plots/polarizationagainst.png)`
 
-`![Hybrid Orbital with field](plots/polarizationwith.png)`
+`![Hybrid Orbital with field](Analytical%20and%20Computational%20Analysis%20of%20Stark%20Effect/plots/polarizationwith.png)`
 
 ---
 
@@ -57,6 +57,6 @@ In `Quadratic_Stark.ipynb`, we computed the Stark coefficient by summing over bo
 * **Computed Coefficient:** $\approx -1.83$
 * **Error:** ~18.6%
   
-`![Coefficient discrepancy](plots/coefferror.png)`
+`![Coefficient discrepancy](Analytical%20and%20Computational%20Analysis%20of%20Stark%20Effect/plots/coefferror.png)`
 
 This discrepancy is **not** a calculation error. It represents the contribution of the **Continuum States** (unbound electrons). The sum over discrete bound states saturates at ~81%, proving that the continuum is physically required to complete the basis set.
