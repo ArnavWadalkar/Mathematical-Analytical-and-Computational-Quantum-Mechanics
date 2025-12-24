@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{cancel}
 \usepackage{fancyhdr}
+\usepackage{float}
 \geometry{margin=1in}
 \usepackage{fancyhdr}
 
@@ -250,8 +251,7 @@ We define the Perturbation matrix $W_{ij}$
 \]
 \noindent This constraint restricts the system from changing the quantum number $m$ during interactions, implying any state with 3, 4 in them are zero since:
 
-\[m = +1 \implies |3\rangle \quad m = -1 \implies |4\rangle]\
-
+\[m = +1 \implies |3\rangle \quad m = -1 \implies |4\rangle\]
 
 \noindent $\therefore$ The only non-zero terms are the states with the same $m$ but opposite parity, $|2s\rangle$ and $|2p\rangle$ with $m=0$. Specifically $\Delta_{12}$ and $\Delta_{21}$
 \begin{align*}
@@ -318,8 +318,12 @@ H_{12} = -3 e a_0 E
 \]
 \noindent $\therefore $ We have the matrix elements, $\Delta_{12} = \Delta_{21} = -3ea_0 E$
 \noindent The nonzero result comes because the $2s$ wavefunction overlaps differently with the positive and negative lobes of the $2p$ wavefunction when weighted by $z$. 
-\\
-\\
+ \begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{linearstarksplitting.png}
+    \caption{Linear splitting of the two states}
+    \label{fig:placeholder}
+  \end{figure}
 \noindent Diagonalizing: Rotating our matrix to find the "Hybrid states" where the flipping stops.
 \[
 \psi_{\pm} = \frac{1}{\sqrt{2}} (|2s\rangle \pm |2p\rangle) = \frac{1}{\sqrt{2}} (|1\rangle \pm |2\rangle)
@@ -339,17 +343,28 @@ H_{12} = -3 e a_0 E
 \\
 \\
 \noindent  If $W_{ii}$ is non-zero: perturbation pushes the energy up or down without changing the shape.
-\\
-\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{polarizationwith.png}
+    \caption{Polarization with the Electric Field}
+    \label{fig:placeholder}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{polarizationagainst.png}
+    \caption{Polarization against the Electric Field}
+    \label{fig:placeholder}
+\end{figure}
+
 \noindent \textbf{Remarks}
 \\
 \\
- \noindent \textbf{1. Tunneling}: When we observe our dipole at the limit $z \to - \infty $ . Considering the Coulomb potential, it creates a barrier of finite width.  Hence, our Hamiltonian describes a system where the electrons aren't bounded, allowing quantum tunneling leading to ionization of the Hydrogen Atom.
+ \noindent \textbf{1. Tunneling}: When we observe our dipole at the limit $z \to - \infty $. Considering the Coulomb potential, it creates a barrier of finite width.  Hence, our Hamiltonian describes a system where the electrons aren't bounded, allowing quantum tunneling leading to ionization of the Hydrogen Atom.
 
 \noindent  The stationary states developed via perturbation theory correspond to metastable states with a finite lifetime. The reason perturbation theory is a valid approximation is that for weak fields, the probability of tunneling is exponentially small, making the lifetime long enough to treat the state as stationary.
 
-\noindent \textbf{2. Laplace-Runga-Lenz Vector:} In our analytical work, we have used spherical coordinates since its efficient for calculations of lower perturbations. However, the problem of the Stark effect in the Hydrogen atom is exactly separable if one uses Parabolic coordinates. This separation is possible due to the $SO(4)$ symmetry of the Hydrogen atom related to the Laplace-Runge-Lenz vector.
+\noindent \textbf{2. Laplace-Runga-Lenz Vector:} In our analytical work, we have used spherical coordinates since it's efficient for calculations of lower perturbations. However, the problem of the Stark effect in the Hydrogen atom is exactly separable if one uses Parabolic coordinates. This separation is possible due to the $SO(4)$ symmetry of the Hydrogen atom related to the Laplace-Runge-Lenz vector.
 
-\noindent \textbf{3. Lamb Shift:} In our analytical work, we have assumed perfect degeneracy between the $l$ states. Therefore, the Linear Stark effect is only observed in the Strong Field Limit, where the Stark interaction energy is much larger than the Lamb shift. For weak fields, the states remain non-degenerate; the effect is Quadratic.
+\noindent \textbf{3. Lamb Shift}: In our analytical work, we have assumed perfect degeneracy between the $l$ states. Therefore, the Linear Stark effect is only observed in the Strong Field Limit, where the Stark interaction energy is much larger than the Lamb shift. For weak fields, the states remain non-degenerate; the effect is Quadratic.
 
 \end{document}
