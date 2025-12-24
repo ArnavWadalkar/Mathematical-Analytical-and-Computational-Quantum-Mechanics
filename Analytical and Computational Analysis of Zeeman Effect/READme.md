@@ -39,7 +39,7 @@ The Python notebook (`Zeemaneffect.ipynb`) calculates the energy spectrum numeri
 This plot visualizes the energy eigenvalues as a function of the magnetic field.
 
 <p align="center">
-  <img src="plots/Zeeman_effect.png" width="600" alt="Energy Splitting">
+  <img src="Plots/Zeeman_effect.png" width="600" alt="Energy Splitting">
 </p>
 
 * **Weak Fields ($x \ll 1$):** The system exhibits the **Quadratic Zeeman effect**.
@@ -49,13 +49,13 @@ This plot visualizes the energy eigenvalues as a function of the magnetic field.
 These plots show the frequency of transitions between energy levels, which corresponds to spectroscopic observables.
 
 <p align="center">
-  <img src="plots/transitionfreq2.png" width="600" alt="Low Frequency">
+  <img src="Plots/transitionfreq2.png" width="600" alt="Low Frequency">
 </p>
 
 * **Low Field:** The hyperfine splitting transition ($\nu_{12}$) decreases as the field mixes the states.
 
 <p align="center">
-  <img src="plots/Transitionfreq.png" width="600" alt="High Frequency">
+  <img src="Plots/Transitionfreq.png" width="600" alt="High Frequency">
 </p>
 
 * **High Field:** The transition frequency increases linearly, characteristic of the dominant Zeeman effect on the electron spin.
