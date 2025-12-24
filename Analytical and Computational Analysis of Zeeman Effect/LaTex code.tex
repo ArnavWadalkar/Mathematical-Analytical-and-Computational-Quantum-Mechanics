@@ -1,0 +1,256 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{fancyhdr}
+
+
+\begin{document}
+
+\pagestyle{fancy}
+\lhead{The Zeeman effect in Hyperfine Muonium Atom}
+\rhead{Arnav Wadalkar | NIT Rourkela}
+\section*{The Zeeman effect in Hyperfine Muonium Atom}
+
+\noindent A Muonium is a perfect hydrogen like-atom consisting of a positive $\mu^+$ and an electron $e^-$. Take the homogeneous magnetic field along $z$ axis:-
+
+\[ \vec{B} = B \hat{e}_z \]
+
+\noindent \textbf{Hamiltonian of the system}
+
+\noindent The Hamiltonian of the system is:-
+
+$$ H_0 = \frac{p^2}{2m} + V(r) \quad \Rightarrow \quad \parbox{0.6\textwidth}{Unperturbed atom ; Hamiltonian if no magnetic spins were considered.} $$
+
+$$ - \left[ \vec{\mu}(\mu) + \vec{\mu}(e) \right] \cdot \vec{B} \quad \Rightarrow \quad \parbox{0.6\textwidth}{External magnetic field interaction; describes the Zeeman effect, potential energy of the two magnetic moments sitting inside the external magnetic field B. This is due to the external magnetic field's twisting of the particles to align for lower energy.} $$
+
+\[ \underbrace{\frac{8\pi}{3} \vec{\mu}(\mu) \cdot \vec{\mu}(e) \cdot \delta(\vec{r})}_{\text{[Fermi Contact Term]}} \quad \Rightarrow \quad \parbox{0.6\textwidth}{Interaction term; the hyperfine structure term, describing how $e^-$ and $\mu^+$ interact with each other.\\ This term causes hyperfine splitting of energy levels even where there is no magnetic field. Note that $\delta (r)$ is zero everywhere except where $\mu^+$ \text{is.} implying that the $e^-$ for a fraction of time is in or on top of $\mu^+$.} \]
+
+\[ \therefore \quad H = H_0 - [\vec{\mu}(\mu) + \vec{\mu}(e)] \cdot \vec{B} - \frac{8\pi}{3} \vec{\mu}(\mu) \cdot \vec{\mu}(e) \cdot \delta(\vec{r})\]
+
+\vspace{1em}
+
+\[\text{Bohr Magneton}: \mu_B^{(i)} = \frac{|e|\hbar}{2m_i c} \quad i = e, \mu\]
+
+\vspace{1em}
+
+ \noindent $\because \quad m_e < m_\mu \Rightarrow \mu_B^{(e)} > \mu_B^{(\mu)} \Rightarrow e^- \text{ is a stronger magnet than } \mu^+$
+
+\vspace{1em}
+
+\noindent Magnetic moment operator: $\quad \vec{\mu} = \underbrace{g^{(i)}}_{\text{g factor}} \mu_B^{(i)} \underbrace{\vec{s}^{(i)}}_{\text{spin}}$
+
+\vspace{1em}
+
+\noindent $\therefore$ The Zeeman term $- [\vec{\mu}(\mu) + \vec{\mu}(e)] \cdot \vec{B}$ will correspond to:
+
+\begin{equation*}
+    = - [ -|g^{(e)}| \mu_B^{(e)} s_z^{(e)} + g^{(\mu)} \mu_B^{(\mu)} s_z^{(\mu)} ] B
+\end{equation*}
+
+\noindent Both $e^-$ and $\mu^+$ are fighting to align spins with $B$.
+\\
+\\
+\noindent The interaction term: $+ \frac{8\pi}{3} (g^{(\mu)} \mu_B^{(\mu)} \vec{s}^{(\mu)}) \cdot (|g^{(e)}| \mu_B^{(e)} \vec{s}^{(e)}) \delta(\vec{r})$ will correspond to:
+
+\begin{equation*}
+    + \frac{16\pi}{3} |g^{(e)}| (\mu_B^{(e)})^2 \frac{(g^{(\mu)} \mu_B^{(\mu)} \cdot 1/2)}{\mu_B^{(e)}} (\vec{s}^{(\mu)} \cdot \vec{s}^{(e)}) \cdot \delta(\vec{r})
+\end{equation*}
+
+\noindent Define $ \mu(\mu) = g^{(\mu)} \mu_B^{(\mu)} \cdot \frac{1}{2}$. The Hamiltonian for Hyperfine Muonium under a magnetic field $ \vec{B} = B \hat{e}_z $ is:
+
+\begin{equation*}
+ \therefore H = H_0 - [ -|g^{(e)}|\mu_B^{(e)}s_z^{(e)} + g^{(\mu)}\mu_B^{(\mu)}s_z^{(\mu)} ] \cdot B + \frac{16\pi}{3} |g^{(e)}| (\mu_B^{(e)})^2 \frac{(\mu(\mu))}{\mu_B^{(e)}} \delta(\vec{r}) (\vec{s}^{(e)} \cdot \vec{s}^{(\mu)})
+\end{equation*}
+
+\noindent \textbf{Spin Coupling}
+
+\noindent To calculate the coupled spin term in the Fermi Contact term of the Hamiltonian, we define F:
+
+$$ F = S^{(e)} + S^{(\mu)} $$
+
+$$ F^2 = (S^{(e)})^2 + (S^{(\mu)})^2 + 2 S^{(e)} S^{(\mu)} \Rightarrow S^{(e)} \cdot S^{(\mu)} = \frac{1}{2} [ F^2 - (S^{(e)})^2 - (S^{(\mu)})^2 ] $$
+
+\noindent From theory of Angular momentum ; we know the eigen values of $S^2$ are $s(s+1)\hbar$ (set $\hbar = 1$)
+\\
+\\
+\noindent $\therefore \text{For } S^{(e)} = \frac{1}{2} \Rightarrow S^{(e)}(S^{(e)}+1) = \frac{3}{4} \text{ and }\text{for } S^{(\mu)} = \frac{1}{2} \Rightarrow S^{(\mu)}(S^{(\mu)}+1) = \frac{3}{4} $
+\\
+\\
+\noindent When spins of both particles are Parallel: $F = 1 \quad \Rightarrow \quad \text{Triple state : lower energy}$
+$$ \frac{1}{2} \left[ 1(1+1) - \frac{3}{4} - \frac{3}{4} \right] = \frac{1}{4} \quad \left[ F=1 \text{ state is shifted up by } \frac{1}{4}\Delta E \right] $$
+
+\noindent and when spins of both particles are anti-parallel: $F = 0  \quad \Rightarrow \quad \text{Singlet state : higher energy} $
+$$ \frac{1}{2} \left[ 0 - \frac{3}{2} \right] = -\frac{3}{4} \qquad \left[ F=0 \text{ state is shifted down by } \frac{3}{4}\Delta E \right] $$
+
+\vspace{1em}
+\noindent Note that for $e^-$ (due to -ve charge): spin down aligns with field's spin up 
+whereas for $\mu^+$: spin up aligns with field's spin up.
+\\
+\\
+\noindent \textbf{Hyperfine Splitting}
+
+\noindent For $B=0$, the expectation value of H in the ground state of hydrogen in the spin basis state $|F, M\rangle$:
+$$ \langle 1s, FM | H | 1s, FM \rangle = E_{1s} + \frac{16\pi}{3} |g^{(e)}| (\mu_B^{(e)})^2 \frac{\mu(\mu)}{\mu_B^{(e)}} \langle 1s, FM | \delta(\vec{r}) (\vec{s}^{(e)} \cdot \vec{s}^{(\mu)}) | 1s, FM \rangle 
+ \times \frac{1}{2} \left( F(F+1) - \frac{3}{4} - \frac{3}{4} \right) $$
+
+\noindent We know, $\langle 1s, FM | \delta(\vec{r}) | 1s, FM \rangle = |\psi_{1s}(0)|^2$, where $|\psi_{1s}(0)|^2$ corresponds to:
+
+$$ |\psi_{1s}(0)|^2 = |R_{1s}(0) Y_{00}|^2 = \frac{4}{a_B^3} \cdot \frac{1}{4\pi} = \frac{1}{\pi a_\infty^3} \left( 1 + \frac{m_e}{m_\mu} \right)^{-3} $$
+
+\noindent Define: $Ry_\infty = \frac{\alpha^2 m_e^2 c^2}{2\hbar c}$
+$$ \therefore \langle 1s, FM | H | 1s, FM \rangle_{B=0} = E_{1s} + \frac{8}{3} \alpha^2 hc Ry_\infty \frac{\mu(\mu)}{\mu_B^{(e)}} |g^{(e)}| \left( 1 + \frac{m_e}{m_\mu} \right)^{-3} \cdot \frac{1}{2} \left[ F(F+1) - \frac{3}{2} \right] $$
+
+\noindent As discussed before for $F=1$ and $F=0$; we get different values differentiating the spin coupling. This creates an energy gap between the Parallel and Anti-Parallel state even when no field is present( $B=0$).
+
+$$ \Delta E = E(1s, F=1) - E(1s, F=0) $$
+
+$$ \Delta \nu = \frac{\Delta E}{h} = \frac{8}{3} \alpha^2 c Ry_\infty \frac{\mu(\mu)}{\mu_B^{(e)}} |g^{(e)}| \left( 1 + \frac{m_e}{m_\mu} \right)^{-3} $$
+\\
+\noindent This phenomenon is known as Hyperfine splitting in Muonium Atom.
+\\
+\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Zeeman_effect.png}
+    \caption{Hyperfine Splitting for B=0}
+    \label{fig:placeholder}
+\end{figure}
+
+\noindent \textbf{Introducing Magnetic field}
+
+\noindent Once the magnetic field is turned on; there are two events in action here:
+
+\begin{itemize}
+    \item Hyperfine coupling: $e^-$ and $\mu^+$ spins want to couple to each other. The electron and muon act like two tiny bar magnets close to each other. They want to align (or anti-align) with each other due to their internal magnetic fields.
+    \item Zeeman effect: External field $B$ wants to twist both spins to align with the direction of the magnetic field.
+\end{itemize}
+
+
+\noindent The mathematical issue arises since we solve the hyperfine term in the coupled basis $|F, M\rangle$ and the Zeeman term is treated with the uncoupled basis $|m_s^{(e)}, m_s^{(\mu)}\rangle$
+
+\vspace{1em}
+
+\noindent \textbf{Case A:} \quad $M = \pm 1$
+
+\noindent Our basis are $|1, +1\rangle$ and $|1, -1\rangle$. Both spins are already pointing in the same direction (both up or both down). Hence, there is no conflict between the two effects.
+$$ \langle 1, M=\pm 1 \mid H - H_0 \mid 1, M=\pm 1 \rangle  = \frac{1}{4} h \Delta \nu + \frac{1}{2} M \left( |g^{(e)}| \mu_B^{(e)} - g^{(\mu)} \mu_B^{(\mu)} \right) B $$
+
+\noindent There is no mixing here because there are no other states with the same total z-momentum (M) for them to mix with, and the energy shift is linear with respect to the magnetic field.
+\\
+\\
+\noindent \textbf{Case B:} \quad $M = 0$
+
+\noindent In this case, mixing occurs since two different states have the same total z momentum $M=0$;
+\\
+\\
+\noindent Triplet: $|1,0\rangle : \text{spins are } ||^{le}, \text{ but effectively horizontal averaging out to be zero.}$
+
+\noindent Singlet: $|0,0\rangle : \text{spins are anti-}||^{le}$
+
+\vspace{1em}
+
+\noindent  Since $\mu_B^{(e)} >> \mu_B^{(\mu)}$, the magnetic field $B$ pulls on the $e^-$ spin much harder than the muon, breaking the singlet/triplet symmetry.
+
+\vspace{1em}
+
+$$ W = \begin{pmatrix} E \text{ of triplet} & \text{mixing} \\ \text{mixing} & E \text{ of singlet} \end{pmatrix} $$
+
+\noindent where:
+\begin{itemize}
+\item Diagonal terms: Hyperfine splitting energy
+\item Off-Diagonal terms: The magnetic field acts as a bridge, allowing the system to hop between a triplet and a singlet state.
+\end{itemize}
+
+$$ W = \begin{pmatrix} E_{1s} + \frac{\Delta E}{4} & W_{12} \\ W_{21} & E_{1s} - \frac{3\Delta E}{4} \end{pmatrix} $$
+
+$$ W_{12} = W_{21} = \frac{1}{2} \left( g^{(\mu)}\mu_B^{(\mu)} + g^{(e)}\mu_B^{(e)} \right) B $$
+\\
+\noindent \textbf{Off-Diagonal term calculation}
+
+\noindent Here we will calculate the matrix element $W_{12}$ by evaluating:
+
+\[ W_{12} = \langle 1,0 | H_Z | 0,0 \rangle \]
+
+\noindent The Singlet state corresponds to destructive interference of the spins(anti-parallel):
+$$ |0,0\rangle = \frac{1}{\sqrt{2}} \left[ |\uparrow_e \downarrow_\mu \rangle - |\downarrow_e \uparrow_\mu \rangle \right] \quad \Rightarrow \quad S_3^{(e)} |0,0\rangle = \frac{1}{\sqrt{2}} \left( \frac{1}{2} |\uparrow_e \downarrow_\mu \rangle + \frac{1}{2} |\downarrow_e \uparrow_\mu \rangle \right) = \frac{1}{2\sqrt{2}} \left( |\uparrow_e \downarrow_\mu \rangle + |\downarrow_e \uparrow_\mu \rangle \right) $$
+
+$$ \therefore \quad S_3^{(e)} |0,0\rangle = \frac{1}{2} |1,0\rangle $$
+\noindent Similarly, we do the same calculations for $S_3^{(\mu)}$
+$$ S_3^{(\mu)} |0,0\rangle = -\frac{1}{2} \frac{1}{\sqrt{2}} \left( |\uparrow_e \downarrow_\mu \rangle + |\downarrow_e \uparrow_\mu \rangle \right)= -\frac{1}{2} |1,0\rangle $$
+
+\noindent Now, we calculate the matrix element $ W_{12} $ as follows:
+
+$$ = \langle 1,0 | \left[ |g^{(e)}|\mu_B^{(e)}s_3^{(e)}B - g^{(\mu)}\mu_B^{(\mu)}s_3^{(\mu)}B \right] | 0,0 \rangle $$
+
+$$ = |g^{(e)}|\mu_B^{(e)}B \cdot \frac{1}{2} \langle 1,0 | 1,0 \rangle + g^{(\mu)}\mu_B^{(\mu)}B \langle 1,0 | 1,0 \rangle $$
+
+$$ \therefore \quad W_{12} = \frac{1}{2} \left[ |g^{(e)}|\mu_B^{(e)} + g^{(\mu)}\mu_B^{(\mu)} \right] B $$
+
+\noindent NOTE: The calculations show applying individual z spin operators to a singlet state $S=0$ transforms it into a triplet state ($S=1$), creating off diagonal element.
+\\
+\\
+\noindent \textbf{Selection Rule for $M$}
+
+When the muonium atom makes a transition from one energy state to another, it either absorbs or emits a photon. Conservation of angular momentum gives us the constraint for the z-momentum M:
+
+\[M_{initial} + M_{photon} = M_{final}\]
+
+The photon being a boson with intrinsic spin $S=1$, restricting the z-momentum $M$ to only take the following 3 values:
+\[M=-1,0,+1\]
+
+Since the photon can only carry away or add at most 1 unit of angular momentum, the atom cannot change its angular momentum by more than 1 unit.
+\\
+\\
+\noindent \textbf{Weak and Strong field approximations}
+\\
+\\
+\noindent Define : $ x = \frac{\text{Magnetic Energy}}{\text{Hyperfine splitting energy}} = \frac{1}{\Delta E} (g^{(\mu)}\mu_B^{(\mu)} + |g^{(e)}|\mu_B^{(e)})B $
+\\
+\\
+\noindent $\text{From } \lambda^2 - (\text{tr } W)\lambda + \det W = 0$, we get the eigenvectors of $W$ as:
+
+$$ \lambda_{1,2} = E_{1s} - \frac{1}{4}\Delta E \pm \underbrace{\frac{1}{2}\Delta E \sqrt{1+x^2}}_{\text{mixing term}} $$
+
+\noindent For weak magnetic fields: $x \ll 1$
+
+$$ \sqrt{1+x^2} \simeq 1 + \frac{x^2}{2} $$ producing Quadratic Zeeman effect.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{transitionfreq2.png}
+    \caption{Low-field transition frequencies. The blue curve ($\nu_{12}$) corresponds to the hyperfine splitting transition, which decreases as the field mixes the states. The green curve ($\nu_{34}$) shows a transition increasing with field strength.}
+    \label{fig:placeholder}
+\end{figure}
+\noindent For strong magnetic fields: $x \gg 1$
+
+$$ \sqrt{1+x^2} \simeq x $$ producing Linear Zeeman effect/Paschen-Back effect.
+\\
+\\
+Electron and muon spins become ignorant of each other, i.e. independent in extremely strong magnetic fields, since the interaction energy with the external field(Zeeman Effect) becomes much larger than the internal interacting energy
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Transitionfreq.png}
+    \caption{Transition frequencies over a wider field range. The orange curve shows a linear increase, characteristic of the dominant Zeeman effect on the electron spin at high fields. The blue curve represents the hyperfine transition, which becomes less sensitive to the field at high magnitudes.}
+    \label{fig:placeholder}
+\end{figure}
+
+\noindent The unified formula for both weak and strong fields is:
+
+$$ E(F,M) = E_{1s} - \frac{1}{4}\Delta E - g^{(\mu)}\mu_B^{(\mu)} M B + (-1)^{F+1} \frac{\Delta E}{2} \sqrt{1 + 2Mx + x^2} $$
+
+\noindent \textbf{Remarks}
+\\
+\\
+\noindent \textbf{1. Level Crossing Resonance:}  This is a phenomenon that occurs when we tune the external magnetic field's value such that the two energy levels of the system become degenerate. You tune the magnetic field until the energy gap itself drops to zero ($ \Delta E \rightarrow 0$). In this state, even a tiny static interaction can cause a transition between states, making it resonant with the static environment. Take the $W$ matrix:
+
+$$ W = \begin{pmatrix} E_1 & W_{12} \\ W_{21} & E_2 \end{pmatrix} $$
+
+\noindent In a resonant state, $E_1 = E_2$ and $W_{12}$ becomes the dominating factor, causing heavy mixing of the states. If you extend the plot to higher fields, the Zeeman energy eventually cancels out the Hyperfine splitting energy, and these two lines intersect. This allows relaxation or spin flips that wouldn't otherwise conserve energy.
+
+\vspace{2em}
+
+\end{document}
+
