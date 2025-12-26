@@ -1,0 +1,27 @@
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+env/
+
+# --- LaTeX Build Artifacts ---
+# These are generated when you compile your PDF
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+
+# --- OS System Files ---
+.DS_Store
+Thumbs.db
