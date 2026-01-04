@@ -1,0 +1,175 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics} % Useful for bra-ket notation and differentials
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+\pagestyle{fancy}
+\lhead{Approximation Methods for Helium Atom}
+\rhead{Arnav Wadalkar | NIT Rourkela}
+
+\section*{Approximation Methods for Helium Atom}
+\noindent \textbf{Helium Atom Hamiltonian}
+
+\noindent The Hamiltonian for the two-electron system is given by:
+\begin{equation*}
+    H = \frac{p_1^2}{2m} - \frac{Z e^2}{4\pi\epsilon_0 r_1} + \frac{p_2^2}{2m} - \frac{Z e^2}{4\pi\epsilon_0 r_2} + \frac{e^2}{4\pi\epsilon_0 |x_1 - x_2|}
+\end{equation*}
+
+\noindent If we ignore the last term (electron-electron interaction), we have two independent Hydrogen atom Hamiltonians. This allows us to represent the wavefunction of the entire system as:
+\begin{equation*}
+    \Psi(x_1, x_2) = \psi_{n_1 l_1 m_1}(x_1) \psi_{n_2 l_2 m_2}(x_2)
+\end{equation}
+
+\noindent Using the well-known results of the Hydrogen atom problem, we get the energy of the system for which we are ignoring the interaction term as:
+\begin{equation*}
+    E = -Z^2 \left( \frac{1}{n_1^2} + \frac{1}{n_2^2} \right) \text{Ry}
+\end{equation}
+
+\noindent For the ground state ($n_1=1, n_2=1$), we get the calculated energy:
+\[
+    E_0 = -109 \text{ eV}
+\]
+\noindent Whereas the experimental value is:
+\[
+    E_0 \simeq -79.0 \text{ eV}
+\]
+
+\noindent This shows that ignoring the interaction term is a naive approach.
+\\
+\\
+\noindent \textbf{First order Perturbation}
+
+\noindent Treating the last term as a perturbation: the perturbative term will be $Z$ times smaller than the unperturbed terms.
+
+\begin{equation*}
+    \frac{\text{Perturbed Element}}{\text{Unperturbed Element}} = \frac{1}{Z}
+\end{equation*}
+\noindent For $Z=2$, the perturbed term is only 2 times smaller, giving a non-ideal condition for perturbation, this separation of scales is weak, indicating that electron correlation is not a small correction but a substantial part of the physics.
+\\
+\\
+\noindent Take the electrons in the hydrogen ground state:
+\begin{equation*}
+    \psi_{100} = \sqrt{\frac{Z^3}{\pi a_0^3}} e^{-Zr/a_0}
+\end{equation*}
+\\
+\\
+The Hamiltonian is defined as: $H = H_0 + H_1$, where the perturbation Hamiltonian $H_1$ is:
+\[
+    H_1 = \frac{e^2}{4\pi\epsilon_0} \frac{1}{|x_1 - x_2|}
+\]
+\noindent First order perturbation is given as:
+\begin{equation*}
+\Delta E = \mel{\Psi}{H'}{\Psi} = \int d^3x_1 \int d^3x_2 \, \Psi_{\text{total}}^*(x_1, x_2) \, H' \, \Psi_{\text{total}}(x_1, x_2)
+\end{equation*}
+
+\noindent where $\Psi_{\text{total}} = \psi_{100}(x_1) \psi_{100}(x_2)$.
+
+\[
+\therefore \Delta E = \frac{e^2}{4\pi\epsilon_0} \int d^3x_1 d^3x_2 \frac{|\psi_{100}(x_1)|^2 |\psi_{100}(x_2)|^2}{|x_1 - x_2|}
+\]
+
+\noindent We now choose the z-axis of the second particle to lie along the $x_1$ direction set by first particle.
+
+\[
+\therefore \text{Angle between the two particles} = \text{Polar angle of the second particle}
+\]
+
+\[
+|x_1 - x_2| = \sqrt{(x_1 - x_2)^2} = \sqrt{r_1^2 + r_2^2 - 2r_1 r_2 \cos\theta_2}
+\]
+\[
+\Delta E = \frac{8\pi^2 e^2}{4\pi\epsilon_0} \left( \frac{Z^3}{\pi a_0^3} \right)^2 \int dr_1 \, r_1^2 e^{-2Zr_1/a_0} \int dr_2 \, r_2^2 e^{-2Zr_2/a_0} \times \int_{-1}^{1} \frac{d(\cos\theta_2)}{\sqrt{r_1^2 + r_2^2 - 2r_1 r_2 \cos\theta_2}}
+\]
+
+\[
+\Delta E = \frac{-2\pi e^2}{\epsilon_0} \left( \frac{Z^3}{\pi a_0^3} \right)^2 \int dr_1 \, r_1^2 e^{-2Zr_1/a_0} \int dr_2 \, r_2^2 e^{-2Zr_2/a_0} \times \frac{|r_1 - r_2| - |r_1 + r_2|}{r_1 r_2}
+\]
+\\
+\\
+\noindent Take $r_1 > r_2$ w.l.o.g ; $|r_1 - r_2| - |r_1 + r_2| = -2r_2$
+
+\[
+\Delta E = \frac{8\pi e^2}{\epsilon_0} \left( \frac{Z^3}{\pi a_0^3} \right)^2 \int_{r_2}^{\infty} dr_1 \, r_1 e^{-2Zr_1/a_0} \int_{0}^{\infty} dr_2 \, r_2^2 e^{-2Zr_2/a_0}
+\Rightarrow
+\Delta E = \frac{5Z}{4} Ry
+\]
+
+\[
+\therefore E_0 \simeq E + \Delta E = \left( -2Z^2 + \frac{5Z}{4} \right) Ry \simeq -74.8 \, \text{eV}
+\]
+
+\noindent Hence, we understand that the perturbative approach brings us much closer to the expected value for the ground state.
+\\
+\\
+\noindent \textbf{Variational method}
+
+\noindent For, $\Psi(x_1, x_2) = \psi(x_1)\psi(x_2)$, we define the wavefunction with a variable $ \alpha$:
+
+\[
+\psi(x, \alpha) = \sqrt{\frac{\alpha^3}{\pi a_0^3}} e^{-\alpha r/a_0}
+\]
+
+\noindent This approach must at least give the accuracy of perturbation theory for $Z = \alpha$, reassuring its validity.
+
+\[
+E(\alpha) = \int d^3x_1 \, d^3x_2 \, \Psi^*(x_1) \Psi^*(x_2) \, H \, \Psi(x_1) \Psi(x_2)
+\]
+
+\noindent We define the Hamiltonian for the two-electron system in terms of $\alpha$ as:
+
+\[
+H = H_\alpha(p_1, r_1) + H_\alpha(p_2, r_2) + \frac{e^2}{4\pi\epsilon_0} \left[ (\alpha - Z)\left(\frac{1}{r_1} + \frac{1}{r_2}\right) \right] + \frac{1}{|x_1 - x_2|}
+\]
+
+\noindent where $H_\alpha = \frac{p^2}{2m} - \frac{\alpha e^2}{4\pi\epsilon_0} \frac{1}{r}$
+
+\[
+E(\alpha) = -2\alpha^2 Ry + \frac{e^2}{4\pi\epsilon_0} \left[ 2(\alpha - Z) \int d^3x \frac{|\psi(x)|^2}{r} + \int d^3x_1 \, d^3x_2 \frac{|\psi(x_1)|^2 |\psi(x_2)|^2}{|x_1 - x_2|} \right]
+\]
+\noindent The calculations of integrals using the calculations of the Perturbation method are as follows:
+\[
+\int d^3x \frac{|\psi(x)|^2}{r} = 4\pi \frac{\alpha^3}{\pi a_0^3} \int dr \cdot r e^{-2\alpha r/a_0} = \frac{\alpha}{a_0}
+\text{ and }
+\int d^3x_1 \, d^3x_2 \frac{|\psi(x_1)|^2 |\psi(x_2)|^2}{|x_1 - x_2|} = \frac{5\alpha}{8 a_0}
+\]
+
+\[
+\therefore E(\alpha) = \left[ -2\alpha^2 + 4(\alpha - Z)\alpha + \frac{5}{4}\alpha \right] Ry
+\]
+\noindent The Variational method then finds the minimum of the function described above, to attain an upper bound to the ground state energy. 
+\[
+\left. \frac{\partial E}{\partial \alpha} \right|_{\alpha = \alpha^*} = 0 \implies \alpha^* = Z - \frac{5}{16}
+\]
+
+\[
+\therefore E(\alpha^*) \simeq -77.5 \, \text{eV}
+\]
+
+\noindent Here, we observe that the upper bound closest to the actual result $E_0 \simeq -79.0 \text{ eV}$ is obtained via Variational principle.
+\newpage
+\noindent \textbf{Remarks}
+\\
+\\
+\noindent \textbf{1. Assumptions:} In the calculations, we have made the following assumptions:
+\begin{itemize}
+    \item Non-relativistic behaviour of electrons
+    \item Neglect of spin--orbit and relativistic corrections
+    \item Spin-singlet ground state, allowing a symmetric spatial wavefunction
+    \item Infinite nuclear mass (no recoil)
+\end{itemize}
+\noindent The remaining discrepancy between the variational result and the experimental ground-state energy arises from electron correlation effects not captured by the simple product wavefunction. More accurate treatments, such Hartree–Fock theory with correlation corrections, further reduce this error.
+\\
+\\
+\noindent \textbf{2. Screening of Charge}: The physical interpretation of the minimum value $\alpha^*$ is described by an phenomena called screening of nuclear charge. When one electron has a higher probability of being closer to the nucleus, the other electron is, on average, pushed to larger radial distances and hence decreasing the net attractive effect of the nucleus on that electron. This phenomena is called Screening of nuclear charge, where the nuclear charge isn't $Z$, rather the effective nuclear charge is what we get through the Variational Method calculations:
+
+\[
+Z_{screened} = Z - \frac{5}{16}
+\]
+The reduction $5/16$ originates from the electron–electron Coulomb repulsion term $\left\langle \frac{1}{r_{12}} \right\rangle$, whose expectation value contributes a positive energy proportional to $\alpha$, effectively weakening the nuclear attraction in the variational minimization.
+\end{document}
