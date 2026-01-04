@@ -1,0 +1,58 @@
+
+## Project 1: Quantum Billiards (Numerical Solver)
+**File:** `2DSE_Solver.ipynb`
+
+### The Problem
+The particle-in-a-box is a standard undergraduate problem, but what happens when the "box" isn't a simple square? This project implements a **Finite Difference** solver to find the energy eigenstates of a particle confined in arbitrary geometries (Circles, Stadiums, etc.).
+
+### Computational Methodology
+The notebook builds the Hamiltonian matrix from scratch using grid discretization:
+
+1.  **The Grid:** We create a discrete $N \times N$ lattice to represent continuous space.
+2.  **The Kinetic Energy:** We construct the Laplacian operator $\nabla^2$ using a sparse matrix representation of the Central Finite Difference method.
+3.  **The Geometry (Penalty Method):** instead of complicated boundary conditions, we use a "mask."
+    * Inside the shape: $V(x,y) = 0$
+    * Outside the shape: $V(x,y) = 10^{10}$ (effectively infinite)
+    * This forces the wavefunction to vanish at the boundaries naturally.
+4.  **The Solver:** We use `scipy.sparse.linalg.eigsh` to find the lowest $k$ eigenvalues (energy levels) and eigenvectors (wavefunctions).
+
+### Visual Results
+The code produces visualizations of the probability density $|\psi|^2$.
+
+* **Symmetry:** In the circle and square, you will see clean geometric symmetries.
+* **Quantum Chaos:** In the **Bunimovich Stadium** shape, you may observe "Quantum Scars"—places where the probability density concentrates along unstable classical periodic orbits.
+
+---
+
+## Project 2: The Helium Atom (Approximation Methods)
+**File:** `Helium_Atom-2.pdf`
+
+### The Problem
+The Helium atom is a classic "Three-Body Problem" (One nucleus, two electrons). Because the electrons repel each other, the Schrödinger equation cannot be separated into solvable parts.
+
+The full Hamiltonian is:
+$$H = -\frac{\hbar^2}{2m}(\nabla_1^2 + \nabla_2^2) - \frac{Ze^2}{4\pi\epsilon_0}\left(\frac{1}{r_1} + \frac{1}{r_2}\right) + \frac{e^2}{4\pi\epsilon_0 |r_1 - r_2|}$$
+
+The last term (electron-electron repulsion) is the troublemaker. This document derives solutions using three levels of approximation.
+
+### 1. The Naive Approach
+If we simply ignore the repulsion term, Helium looks like two independent Hydrogen atoms.
+* **Calculated Energy:** $-109 \text{ eV}$
+* **Experimental Value:** $-79.0 \text{ eV}$
+* **Verdict:** A $38\%$ error. Clearly, electrons *do* notice each other.
+
+### 2. First-Order Perturbation Theory
+We treat the repulsion term as a small perturbation $H'$ and calculate its expectation value $\langle \psi_0 | H' | \psi_0 \rangle$.
+* **Calculated Energy:** $-74.8 \text{ eV}$
+* **Verdict:** Much better! This confirms that electron correlation is a major energy component.
+
+### 3. The Variational Method (Screening)
+We introduce a trial wavefunction with an adjustable parameter $\alpha$ (effective nuclear charge). We ask: "What effective charge does one electron 'see' when the other electron is in the way?"
+* **The Physics:** This accounts for **Screening**. One electron clouds the view of the nucleus for the other, effectively reducing the nuclear charge from $Z=2$ to $Z_{eff} = 1.6875$.
+* **Calculated Energy:** $-77.5 \text{ eV}$
+* **Verdict:** The closest approximation to reality in this set.
+---
+
+## Author
+**Arnav Wadalkar**
+*National Institute of Technology, Rourkela*
