@@ -46,8 +46,7 @@ Models the behavior of **Muonium** ($\mu^+ e^-$) in a homogeneous magnetic field
     * **Level Crossing Resonance:** Identifies magnetic field strengths where energy levels degenerate, allowing for resonant transitions.
 * **Key Files:** `Zeemaneffect.ipynb`, `Zeeman_Effect_Muonium.pdf`.
 
----
-### 3. Approximation methods on Helium Atom
+### 4. Approximation methods on Helium Atom
 *Folder: `Approximation Methods on Helium Atom'*
 
 A theoretical investigation into the ground state of the Helium atom, addressing the classic "Three-Body Problem" where the electron-electron interaction term ($e^2/r_{12}$) prevents an exact analytical solution.
