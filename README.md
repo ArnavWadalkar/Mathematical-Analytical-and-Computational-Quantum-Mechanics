@@ -47,17 +47,28 @@ Models the behavior of **Muonium** ($\mu^+ e^-$) in a homogeneous magnetic field
 * **Key Files:** `Zeemaneffect.ipynb`, `Zeeman_Effect_Muonium.pdf`.
 
 ---
+### 3. Approximation methods on Helium Atom
+*Folder: `Approximation Methods on Helium Atom'*
 
-## Future Work
+A theoretical investigation into the ground state of the Helium atom, addressing the classic "Three-Body Problem" where the electron-electron interaction term ($e^2/r_{12}$) prevents an exact analytical solution.
 
-The following modules are currently in development and will be added to the repository soon:
+* **Perturbation Theory:** Treats the electron repulsion as a first-order perturbation to the independent particle model, significantly correcting the naive energy estimate (-109 eV $\to$ -74.8 eV).
+* **Variational Method:** Implements trial wavefunctions with an adjustable effective nuclear charge parameter ($\alpha$).
+* **Nuclear Screening:** Demonstrates how one electron "screens" the nucleus from the other, resulting in an optimal effective charge $Z_{eff} \approx 1.69$ rather than the bare nuclear charge $Z=2$.
+* **Key Files:** `Helium_Atom-2.pdf`.
 
-* **Variational Method for Helium:** Implementing trial wavefunctions to approximate the ground state energy of the Helium atom, accounting for electron-electron repulsion.
-* **Quantum Monte Carlo (QMC) for Helium:** A stochastic approach to solving the many-body Schrödinger equation for high-precision energy estimates.
+### 5. Quantum Billiards (2D Schrödinger Solver)
+*Folder: `Quantum Billiards`*
 
----
+A computational engine designed to solve the Time-Independent Schrödinger Equation (TISE) for a particle confined in arbitrary 2D geometries (infinite potential wells).
 
-## Technologies
+* **Finite Difference Method:** Discretizes the Laplacian operator $\nabla^2$ on an $N \times N$ grid to construct the Hamiltonian matrix.
+* **Arbitrary Geometries:** Utilizes a "Penalty Method" (masking) to enforce Dirichlet boundary conditions on complex shapes like circles, squares, and stadiums.
+* **Quantum Chaos:** Visualizes the probability density $|\psi|^2$ to identify phenomena such as "Quantum Scars" in the Bunimovich Stadium, where wavefunctions concentrate along unstable classical periodic orbits.
+* **Key Files:** `2DSE_Solver.ipynb`.
+
+
+## Techniques
 * **Python:** `numpy`, `scipy` (Linear Algebra, Special Functions), `matplotlib` (Visualization).
 * **Mathematics:** Functional Analysis, Perturbation Theory, Group Theory.
 * **Documentation:** LaTeX-generated analytical derivations.
