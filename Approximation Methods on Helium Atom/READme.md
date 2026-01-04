@@ -1,4 +1,5 @@
-The Helium Atom (Approximation Methods)
+## The Helium Atom (Approximation Methods)
+
 **File:** `Helium_Atom-2.pdf`
 
 ### The Problem
