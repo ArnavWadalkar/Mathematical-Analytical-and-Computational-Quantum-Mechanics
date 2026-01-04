@@ -18,5 +18,8 @@ The notebook builds the Hamiltonian matrix from scratch using grid discretizatio
 ### Visual Results
 The code produces visualizations of the probability density $|\psi|^2$.
 
+<p align="center">
+  <img src="Plots/Stadium.png" width="600" alt="Probability Density">
+</p>
 * **Symmetry:** In the circle and square, you will see clean geometric symmetries.
 * **Quantum Chaos:** In the **Bunimovich Stadium** shape, you may observe "Quantum Scars"—places where the probability density concentrates along unstable classical periodic orbits.
