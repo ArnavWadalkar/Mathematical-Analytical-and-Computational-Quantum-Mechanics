@@ -7,6 +7,8 @@
 ## Overview
 This project develops the mathematical framework that describes the features of quantum systems, such as superposition, interference, quantum uncertainty, etc.
 
+**NOTE** - This article provides an overview of the mathemematical theorems required to justify Quantum Mehchanics and it's formalisms. There is no proof provided for any theorem. However they can be found in many of the excellent mathematical physics texts available. Further, if mathematical foundations of Quantum Mechanics be an ocean, the article only provides a structural map of the surface of it. It does not provide the rigorous mathematical justifications, origin or underlying proofs. The article however provides intuitive or elementary justifications of selected topics.
+
 ## Table of Contents
 
 ### 1. Hilbert Space Formalism
@@ -51,4 +53,4 @@ Characterises systems made of multiple parts using the tensor product structure.
 * **Bell's Theorem:** Proves that no theory satisfying local realism can reproduce all quantum mechanical predictions.
 * **Entropy:** Quantifies entanglement using the von Neumann entropy of the reduced state, which equals the Shannon entropy of the Schmidt coefficients.
 
-
+**NOTE** - This article provides an overview of the mathemematical theorems to justify Quantum Mehchanics and it's formalisms. There is no proof provided for any theorem. However they can be found in many of the excellent mathematical physics texts available
