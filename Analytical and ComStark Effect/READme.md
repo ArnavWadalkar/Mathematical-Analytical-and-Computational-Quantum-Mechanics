@@ -1,11 +1,13 @@
 # The Stark Effect: Analytical and Computational Study
 
 ## Overview
-This project explores the **Stark Effect**—the shifting and splitting of spectral lines of atoms due to an external electric field $\vec{E}$. 
+This article explores the **Stark Effect**—the shifting and splitting of spectral lines of atoms due to an external electric field $\vec{E}$. 
 
 The folder contains analytical derivations using Time-Independent Perturbation Theory with a computational Python implementation to visualize the physics. We analyze two distinct cases:
 1. **Linear Stark Effect:** Degenerate states (Hydrogen $n=2$).
 2. **Quadratic Stark Effect:** Non-degenerate states (Hydrogen $n=1$).
+
+**NOTE** - The plots are produced with the help of AI. I have used the wonderful book Quantum Physics by Florian Sheck as a reference for the mathematical work of this article.
 
 ## Project Structure
 * `Analytical_solution.pdf`: Complete handwritten derivation of the 1st and 2nd order energy corrections, selection rules, and matrix elements.
