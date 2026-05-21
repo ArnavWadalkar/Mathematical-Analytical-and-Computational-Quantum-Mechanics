@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuclear Shell Model Visualizer</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --panel-bg: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --accent: #0d6efd;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #sidebar {
+            width: 320px;
+            background-color: var(--panel-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        #main-content {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        #plot-container {
+            flex-grow: 1;
+            background: var(--panel-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        h2, h3 { margin: 0 0 10px 0; }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        select, input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+        .val-display {
+            font-weight: bold;
+            color: var(--accent);
+            float: right;
+        }
+        .hidden { display: none !important; }
+        .info-box {
+            font-size: 0.9em;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar">
+        <h2>Interactive Models</h2>
+        
+        <div class="control-group">
+            <label for="sim-select"><strong>Select Visualization:</strong></label>
+            <select id="sim-select">
+                <option value="ho_vs_inf">1. HO vs Infinite Square Well</option>
+                <option value="woods_saxon">2. Woods-Saxon & Spillover</option>
+                <option value="spin_orbit">3. SU(2) Spin-Orbit Splitting</option>
+            </select>
+        </div>
+
+        <div id="controls-spatial" class="control-group">
+            <label>Orbital Angular Momentum (l): <span id="l-val" class="val-display">1</span></label>
+            <input type="range" id="l-slider" min="0" max="6" step="1" value="1">
+            
+            <div id="pot-toggle-container" style="margin-top: 15px;">
+                <label for="pot-select"><strong>Potential Type:</strong></label>
+                <select id="pot-select">
+                    <option value="ho">Harmonic Oscillator</option>
+                    <option value="inf">Infinite Square Well</option>
+                </select>
+            </div>
+
+            <div id="a-slider-container" class="hidden" style="margin-top: 15px;">
+                <label>Edge Rounding (a): <span id="a-val" class="val-display">0.1</span></label>
+                <input type="range" id="a-slider" min="0.01" max="1.5" step="0.05" value="0.1">
+            </div>
+        </div>
+
+        <div id="controls-spin" class="control-group hidden">
+            <label>Orbital Angular Momentum (l): <span id="l-spin-val" class="val-display">3</span></label>
+            <input type="range" id="l-spin-slider" min="1" max="6" step="1" value="3">
+            
+            <label style="margin-top: 15px;"><strong>Interaction Type:</strong></label>
+            <select id="force-select">
+                <option value="nuclear">Nuclear (Strong Force V < 0)</option>
+                <option value="atomic">Atomic (EM Force V > 0)</option>
+            </select>
+        </div>
+
+        <div class="info-box" id="info-text">
+            Adjust the parameters to see how the centrifugal barrier breaks the SU(3) degeneracy by pushing high-l states outward.
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="plot-container"></div>
+    </div>
+
+    <script>
+        const R = 5.0; 
+        const hbar2_2m = 25.0; 
+        const V0_WS = -50.0;
+
+        const r = [];
+        for(let i = 0.1; i <= 10; i += 0.05) r.push(i);
+
+        function getHarmonic(r_arr) {
+            return r_arr.map(x => 0.8 * Math.pow(x, 2));
+        }
+
+        function getInfinite(r_arr) {
+            return r_arr.map(x => x <= R ? 0 : 80); 
+        }
+
+        function getWoodsSaxon(r_arr, a) {
+            return r_arr.map(x => V0_WS / (1 + Math.exp((x - R) / a)));
+        }
+
+        function getCentrifugal(r_arr, l) {
+            return r_arr.map(x => (hbar2_2m * l * (l + 1)) / Math.pow(x, 2));
+        }
+
+        function renderSpatialPlot(mode, l, potType, a) {
+            let V_base, y_range, title;
+            const V_cent = getCentrifugal(r, l);
+
+            if (mode === 'ho_vs_inf') {
+                V_base = potType === 'ho' ? getHarmonic(r) : getInfinite(r);
+                y_range = [-5, 80];
+                title = 'Effective Potential: SU(3) Degeneracy Breaking';
+            } else {
+                V_base = getWoodsSaxon(r, a);
+                y_range = [-60, 40];
+                title = 'Woods-Saxon Potential & Centrifugal Relief';
+            }
+
+            const V_eff = V_base.map((v, i) => v + V_cent[i]);
+
+            const traceBase = {
+                x: r, y: V_base,
+                mode: 'lines',
+                name: 'Physical Potential V(r)',
+                line: { color: 'rgba(100, 100, 100, 0.5)', width: 2, dash: 'dash' }
+            };
+
+            const traceEff = {
+                x: r, y: V_eff,
+                mode: 'lines',
+                name: `Effective Potential (l=${l})`,
+                line: { color: '#d62728', width: 3 }
+            };
+
+            const layout = {
+                title: title,
+                xaxis: { title: 'Radius (r)', range: [0, 9] },
+                yaxis: { title: 'Energy / Potential', range: y_range },
+                shapes: [{
+                    type: 'line', x0: R, x1: R, y0: y_range[0], y1: y_range[1],
+                    line: { color: 'gray', width: 1, dash: 'dot' }
+                }],
+                margin: { t: 50, b: 50, l: 60, r: 20 }
+            };
+
+            Plotly.newPlot('plot-container', [traceBase, traceEff], layout, {responsive: true});
+        }
+
+        function renderSpinOrbitPlot(l, force) {
+            const V_ls = force === 'nuclear' ? -2.0 : 2.0; 
+            
+            const e_greater = 0.5 * V_ls * l;
+            const e_lesser = 0.5 * V_ls * (-l - 1);
+            
+            const traceUnperturbed = {
+                x: [0.5, 1.5], y: [0, 0],
+                mode: 'lines+text', name: 'Uncoupled State',
+                text: ['Unperturbed (l)'], textposition: 'top center',
+                line: { color: 'black', width: 4 }
+            };
+
+            const traceGreater = {
+                x: [2.5, 3.5], y: [e_greater, e_greater],
+                mode: 'lines+text', name: 'j = l + 1/2',
+                text: [`j = ${l} + 1/2`], textposition: force === 'nuclear' ? 'bottom center' : 'top center',
+                line: { color: '#1f77b4', width: 4 }
+            };
+
+            const traceLesser = {
+                x: [2.5, 3.5], y: [e_lesser, e_lesser],
+                mode: 'lines+text', name: 'j = l - 1/2',
+                text: [`j = ${l} - 1/2`], textposition: force === 'nuclear' ? 'top center' : 'bottom center',
+                line: { color: '#ff7f0e', width: 4 }
+            };
+
+            const traceConnect1 = { x: [1.5, 2.5], y: [0, e_greater], mode: 'lines', showlegend: false, line: { color: 'gray', dash: 'dot'} };
+            const traceConnect2 = { x: [1.5, 2.5], y: [0, e_lesser], mode: 'lines', showlegend: false, line: { color: 'gray', dash: 'dot'} };
+
+            const gap = Math.abs(e_greater - e_lesser);
+
+            const layout = {
+                title: `SU(2) Clebsch-Gordan Splitting (Total Gap ∝ ${2*l+1})`,
+                xaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [0, 4] },
+                yaxis: { title: 'Energy Shift', range: [-15, 15] },
+                annotations: [{
+                    x: 3.0, y: (e_greater + e_lesser)/2,
+                    text: `Gap = ${gap}`,
+                    showarrow: false,
+                    font: { size: 16, color: 'green' }
+                }],
+                margin: { t: 50, b: 50, l: 60, r: 20 }
+            };
+
+            Plotly.newPlot('plot-container', [traceUnperturbed, traceGreater, traceLesser, traceConnect1, traceConnect2], layout, {responsive: true});
+        }
+
+        const dom = {
+            sim: document.getElementById('sim-select'),
+            spatialCtrl: document.getElementById('controls-spatial'),
+            spinCtrl: document.getElementById('controls-spin'),
+            potToggle: document.getElementById('pot-toggle-container'),
+            potSelect: document.getElementById('pot-select'),
+            aSliderGrp: document.getElementById('a-slider-container'),
+            lSlider: document.getElementById('l-slider'),
+            aSlider: document.getElementById('a-slider'),
+            lSpinSlider: document.getElementById('l-spin-slider'),
+            forceSelect: document.getElementById('force-select'),
+            info: document.getElementById('info-text')
+        };
+
+        function updateUI() {
+            const mode = dom.sim.value;
+            
+            if (mode === 'ho_vs_inf') {
+                dom.spatialCtrl.classList.remove('hidden');
+                dom.spinCtrl.classList.add('hidden');
+                dom.potToggle.classList.remove('hidden');
+                dom.aSliderGrp.classList.add('hidden');
+                dom.info.innerText = "Notice how flattening the bottom (Infinite Well) provides a massive energy 'discount' to high-l states, as they no longer have to climb the walls of the Harmonic bowl.";
+                renderSpatialPlot(mode, parseInt(dom.lSlider.value), dom.potSelect.value, 0);
+            } 
+            else if (mode === 'woods_saxon') {
+                dom.spatialCtrl.classList.remove('hidden');
+                dom.spinCtrl.classList.add('hidden');
+                dom.potToggle.classList.add('hidden');
+                dom.aSliderGrp.classList.remove('hidden');
+                dom.info.innerText = "Increase the rounding 'a'. Because high-l states live at the boundary R, rounding the wall shaves off the barrier exactly where they exist, dropping their energy drastically compared to l=0 states.";
+                renderSpatialPlot(mode, parseInt(dom.lSlider.value), null, parseFloat(dom.aSlider.value));
+            } 
+            else if (mode === 'spin_orbit') {
+                dom.spatialCtrl.classList.add('hidden');
+                dom.spinCtrl.classList.remove('hidden');
+                dom.info.innerText = "In nuclei, the strong force makes the coupling negative, driving the j = l+1/2 state violently downwards. Notice how increasing 'l' scales the gap, creating the Intruder States.";
+                renderSpinOrbitPlot(parseInt(dom.lSpinSlider.value), dom.forceSelect.value);
+            }
+        }
+
+        dom.sim.addEventListener('change', updateUI);
+        
+        dom.lSlider.addEventListener('input', (e) => {
+            document.getElementById('l-val').innerText = e.target.value;
+            updateUI();
+        });
+        dom.aSlider.addEventListener('input', (e) => {
+            document.getElementById('a-val').innerText = e.target.value;
+            updateUI();
+        });
+        dom.potSelect.addEventListener('change', updateUI);
+        
+        dom.lSpinSlider.addEventListener('input', (e) => {
+            document.getElementById('l-spin-val').innerText = e.target.value;
+            updateUI();
+        });
+        dom.forceSelect.addEventListener('change', updateUI);
+
+        updateUI();
+    </script>
+</body>
+</html>
