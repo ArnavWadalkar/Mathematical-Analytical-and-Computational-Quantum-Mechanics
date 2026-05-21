@@ -15,6 +15,8 @@ The project is divided into distinct modules, each containing detailed analytica
 ### 1. Mathematical Foundations of Quantum Mechanics
 *Folder: `Mathematical Foundations in Quantum Mechanics`*
 
+NOTE - This article provides an overview of the mathemematical theorems required to justify Quantum Mehchanics and it's formalisms. There is no proof provided for any theorem. However they can be found in many of the excellent mathematical physics texts available. Further, if mathematical foundations of Quantum Mechanics be an ocean, the article only provides a structural map of the surface of it. It does not provide the rigorous mathematical justifications, origin or underlying proofs. The article however provides intuitive or elementary justifications of selected topics.
+
 This module establishes the rigorous mathematical language required to describe quantum systems, moving beyond basic wave mechanics into functional analysis and measure theory.
 
 * **Hilbert Space Formalism:** Inner product spaces, dual spaces, and the Riesz Representation Theorem.
@@ -27,6 +29,8 @@ This module establishes the rigorous mathematical language required to describe 
 ### 2. The Stark Effect
 *Folder: `Analytical and Computational Analysis of Stark Effect`*
 
+NOTE - The plots are produced with the help of AI. I have used the wonderful book Quantum Physics by Florian Sheck as a reference for the mathematical work of this article.
+
 An analytical and computational study of the shifting and splitting of spectral lines under an external electric field $\vec{E}$.
 
 * **Linear Stark Effect:** Analyzes degenerate state splitting (Hydrogen $n=2$) and the formation of hybrid orbitals.
@@ -36,6 +40,8 @@ An analytical and computational study of the shifting and splitting of spectral 
 
 ### 3. The Zeeman Effect (Muonium)
 *Folder: `Analytical and Computational Analysis of Zeeman Effect`*
+
+NOTE - The plots are produced with the help of AI. I have used the wonderful book Quantum Physics by Florian Sheck as a reference for the mathematical work of this article.
 
 Models the behavior of **Muonium** ($\mu^+ e^-$) in a homogeneous magnetic field, solving for the interplay between internal Hyperfine coupling and the external Zeeman effect.
 
@@ -49,27 +55,20 @@ Models the behavior of **Muonium** ($\mu^+ e^-$) in a homogeneous magnetic field
 ### 4. Approximation methods on Helium Atom
 *Folder: `Approximation Methods on Helium Atom'*
 
-A theoretical investigation into the ground state of the Helium atom, addressing the classic "Three-Body Problem" where the electron-electron interaction term ($e^2/r_{12}$) prevents an exact analytical solution.
+NOTE - I have used the wonderful book Quantum Physics by Florian Sheck as a reference for the mathematical work of this article.
+
+A theoretical study of the ground state of the Helium atom, addressing the classic "Three-Body Problem" where the electron-electron interaction term ($e^2/r_{12}$) prevents an exact analytical solution.
 
 * **Perturbation Theory:** Treats the electron repulsion as a first-order perturbation to the independent particle model, significantly correcting the naive energy estimate (-109 eV $\to$ -74.8 eV).
 * **Variational Method:** Implements trial wavefunctions with an adjustable effective nuclear charge parameter ($\alpha$).
 * **Nuclear Screening:** Demonstrates how one electron "screens" the nucleus from the other, resulting in an optimal effective charge $Z_{eff} \approx 1.69$ rather than the bare nuclear charge $Z=2$.
 * **Key Files:** `Helium_Atom-2.pdf`.
 
-### 5. Quantum Billiards (2D Schrödinger Solver)
-*Folder: `Quantum Billiards`*
-
-A computational engine designed to solve the Time-Independent Schrödinger Equation (TISE) for a particle confined in arbitrary 2D geometries (infinite potential wells).
-
-* **Finite Difference Method:** Discretizes the Laplacian operator $\nabla^2$ on an $N \times N$ grid to construct the Hamiltonian matrix.
-* **Arbitrary Geometries:** Utilizes a "Penalty Method" (masking) to enforce Dirichlet boundary conditions on complex shapes like circles, squares, and stadiums.
-* **Quantum Chaos:** Visualizes the probability density $|\psi|^2$ to identify phenomena such as "Quantum Scars" in the Bunimovich Stadium, where wavefunctions concentrate along unstable classical periodic orbits.
-* **Key Files:** `2DSE_Solver.ipynb`.
 
 
 ## Techniques
 * **Python:** `numpy`, `scipy` (Linear Algebra, Special Functions), `matplotlib` (Visualization).
-* **Mathematics:** Functional Analysis, Perturbation Theory, Group Theory.
+* **Mathematics:** Introductory Functional Analysis, Perturbation Theory, Introductory Group Theory.
 * **Documentation:** LaTeX-generated analytical derivations.
 
 ## License
