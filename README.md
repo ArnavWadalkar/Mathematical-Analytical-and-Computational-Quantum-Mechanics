@@ -64,7 +64,14 @@ A theoretical study of the ground state of the Helium atom, addressing the class
 * **Nuclear Screening:** Demonstrates how one electron "screens" the nucleus from the other, resulting in an optimal effective charge $Z_{eff} \approx 1.69$ rather than the bare nuclear charge $Z=2$.
 * **Key Files:** `Helium_Atom-2.pdf`.
 
+### 5. Group Theoretic Analysis of the Nuclear Shell Model
+*Folder: `Nuclear Shell Model`*
 
+> **NOTE:** The interactive HTML simulation in this module was generated with the assistance of AI. Further, the structure and content of the article is inspired and influenced by Modern Quantum Mehcanics by JJ Sakurai and Jim Napolitano.
+
+An exploration of how nucleons arrange into discrete energy levels by tracking the evolution of the nuclear potential and its fundamental symmetries.
+* **Core Topics:** SU(3) symmetry in Isotropic Harmonic Oscillators, SO(3) symmetry in Infinite/Finite Square Wells, Woods-Saxon potential boundaries, and SU(2) collapse via Spin-Orbit Coupling.
+* **Key Files:** `Nulcear_Shell_Model.pdf`, `Nuclear_shell_model.html`
 
 ## Techniques
 * **Python:** `numpy`, `scipy` (Linear Algebra, Special Functions), `matplotlib` (Visualization).
