@@ -5,6 +5,8 @@ This project models the behavior of **Muonium**, a hydrogen-like atom consisting
 
 The simulation solves for the energy eigenvalues of the system by constructing the full Hamiltonian, accounting for both the internal **Hyperfine coupling** and the external **Zeeman effect**. The code visualizes how energy levels split and mix as the magnetic field strength increases, demonstrating phenomena such as the **Quadratic Zeeman effect** and the **Paschen-Back effect**.
 
+**NOTE** - The plots are produced with the help of AI. I have used the wonderful book Quantum Physics by Florian Sheck as a reference for the mathematical work of this article.
+
 ## Theoretical Background
 
 ### The Hamiltonian
