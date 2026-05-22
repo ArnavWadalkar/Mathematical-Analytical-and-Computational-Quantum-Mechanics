@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobalt-60 Parity Non-Conservation Simulation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { margin-top: 0; text-align: center; color: #4DA8DA; }
+        .container {
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            max-width: 850px;
+            width: 100%;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        button {
+            background-color: #4DA8DA;
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            max-width: 180px;
+        }
+        button:hover { filter: brightness(1.1); }
+        canvas {
+            background: #0d0d0d;
+            border-radius: 8px;
+            border: 1px solid #333;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            width: 100%;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .stat-box {
+            padding: 10px 20px;
+            background: #2a2a2a;
+            border-radius: 6px;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+        }
+        .stat-up { color: #ff6b6b; }
+        .stat-down { color: #4ecdc4; }
+        input[type=range] { width: 100%; max-width: 150px; }
+        .description {
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cobalt-60 Beta Decay: Parity Violation</h1>
+    
+    <div class="container">
+        <div class="controls">
+            <div class="control-group">
+                <label for="tempSlider">Temp: <span id="tempValue">Low</span></label>
+                <input type="range" id="tempSlider" min="0" max="100" value="0">
+            </div>
+            
+            <div class="control-group">
+                <button id="flipFieldBtn">Reverse Mag Field</button>
+                <small style="margin-top:5px; color:#888;">Flips Spin J</small>
+            </div>
+            
+            <div class="control-group">
+                <button id="parityToggle" style="background-color: #ff6b6b; color: white;">Reality: Violated</button>
+                <small style="margin-top:5px; color:#888;">Physics Rule</small>
+            </div>
+
+            <div class="control-group">
+                <button id="mirrorToggle" style="background-color: #fca311; color: #121212;">Mirror View: OFF</button>
+                <small style="margin-top:5px; color:#888;">Toggle Split Screen</small>
+            </div>
+        </div>
+
+        <canvas id="simCanvas" width="800" height="500"></canvas>
+
+        <div class="stats">
+            <div class="stat-box stat-up">Real Electrons UP: <span id="countUp">0</span></div>
+            <div class="stat-box stat-down">Real Electrons DOWN: <span id="countDown">0</span></div>
+        </div>
+
+        <div class="description">
+            <p><strong>The Mirror Paradox:</strong> Turn on the <strong>Mirror View</strong> to see a geometric reflection of the experiment across a horizontal plane in the center. Notice that while the electron paths flip directions in the mirror, the Spin Vector ($J$) does not flip (because angular momentum is a pseudovector). The mirror world displays a nucleus doing something that violates the laws of physics observed in the real world.</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        const tempSlider = document.getElementById('tempSlider');
+        const tempValue = document.getElementById('tempValue');
+        const flipFieldBtn = document.getElementById('flipFieldBtn');
+        const parityToggle = document.getElementById('parityToggle');
+        const mirrorToggle = document.getElementById('mirrorToggle');
+        const countUpEl = document.getElementById('countUp');
+        const countDownEl = document.getElementById('countDown');
+
+        // Simulation State
+        let fieldUp = true; 
+        let temperature = 0; 
+        let parityViolated = true; 
+        let showMirror = false;
+        
+        let electrons = [];
+        let countUp = 0;
+        let countDown = 0;
+        let rotationAngle = 0;
+
+        // Controls Logic
+        tempSlider.addEventListener('input', (e) => {
+            temperature = e.target.value / 100;
+            if(temperature < 0.1) tempValue.innerText = "Low";
+            else if(temperature < 0.5) tempValue.innerText = "Medium";
+            else tempValue.innerText = "High";
+        });
+
+        flipFieldBtn.addEventListener('click', () => {
+            fieldUp = !fieldUp;
+            resetStats();
+        });
+
+        parityToggle.addEventListener('click', () => {
+            parityViolated = !parityViolated;
+            if (parityViolated) {
+                parityToggle.innerText = "Reality: Violated";
+                parityToggle.style.backgroundColor = "#ff6b6b";
+            } else {
+                parityToggle.innerText = "Theory: Conserved";
+                parityToggle.style.backgroundColor = "#4ecdc4";
+            }
+            resetStats();
+        });
+
+        mirrorToggle.addEventListener('click', () => {
+            showMirror = !showMirror;
+            mirrorToggle.innerText = showMirror ? "Mirror View: ON" : "Mirror View: OFF";
+            mirrorToggle.style.backgroundColor = showMirror ? "#ffb703" : "#fca311";
+            resetStats();
+        });
+
+        function resetStats() {
+            countUp = 0;
+            countDown = 0;
+            countUpEl.innerText = countUp;
+            countDownEl.innerText = countDown;
+            electrons = [];
+        }
+
+        class Electron {
+            constructor(x, y, vy, isMirror = false) {
+                this.x = x + (Math.random() * 20 - 10);
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 4;
+                this.vy = vy;
+                this.life = 1.0;
+                this.size = 3;
+                this.isMirror = isMirror;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= 0.01;
+            }
+            draw(ctx) {
+                ctx.globalAlpha = Math.max(0, this.life);
+                // Mirror electrons are slightly desaturated/paler
+                ctx.fillStyle = this.isMirror ? '#a8dadc' : '#4DA8DA';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+                
+                // Trail
+                ctx.strokeStyle = this.isMirror ? `rgba(168, 218, 220, ${this.life * 0.5})` : `rgba(77, 168, 218, ${this.life * 0.5})`;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - this.vx * 3, this.y - this.vy * 3);
+                ctx.stroke();
+            }
+        }
+
+        function drawMagneticField() {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.lineWidth = 2;
+            const direction = fieldUp ? -1 : 1;
+            
+            for (let i = 50; i < canvas.width; i += 60) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.stroke();
+                
+                // Arrows
+                for(let j = 50; j < canvas.height; j+= 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(i - 5, j + (10 * direction));
+                    ctx.lineTo(i, j);
+                    ctx.lineTo(i + 5, j + (10 * direction));
+                    ctx.stroke();
+                }
+            }
+
+            if (showMirror) {
+                // Draw horizontal mirror plane
+                ctx.strokeStyle = 'rgba(100, 200, 255, 0.6)';
+                ctx.lineWidth = 3;
+                ctx.setLineDash([15, 10]);
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height / 2);
+                ctx.lineTo(canvas.width, canvas.height / 2);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                ctx.fillStyle = 'rgba(100, 200, 255, 0.8)';
+                ctx.font = 'bold 16px Arial';
+                ctx.textAlign = 'right';
+                ctx.fillText('MIRROR PLANE', canvas.width - 20, canvas.height / 2 - 10);
+            }
+        }
+
+        function drawNucleus(centerX, centerY, labelText) {
+            // Spin Vector (J) Arrow - Note: Pseudovector direction does NOT flip in this horizontal reflection!
+            const jDirection = fieldUp ? -1 : 1;
+            const arrowLength = 70 - (temperature * 40); 
+            
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX, centerY + arrowLength * jDirection);
+            ctx.stroke();
+            
+            // Arrowhead
+            ctx.fillStyle = '#e0e0e0';
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY + arrowLength * jDirection);
+            ctx.lineTo(centerX - 8, centerY + (arrowLength - 15) * jDirection);
+            ctx.lineTo(centerX + 8, centerY + (arrowLength - 15) * jDirection);
+            ctx.fill();
+            
+            // J Label
+            ctx.fillStyle = 'white';
+            ctx.font = "20px Arial";
+            ctx.fillText("J", centerX + 15, centerY + (arrowLength/2) * jDirection);
+
+            if (labelText) {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.font = 'bold 24px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(labelText, centerX - 180, centerY);
+            }
+
+            // Draw Atom Sphere
+            const radius = 35;
+            const gradient = ctx.createRadialGradient(centerX - 10, centerY - 10, 5, centerX, centerY, radius);
+            gradient.addColorStop(0, '#ff9a9e');
+            gradient.addColorStop(1, '#fecfef');
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            
+            const wobbleX = (Math.random() - 0.5) * temperature * 10;
+            const wobbleY = (Math.random() - 0.5) * temperature * 10;
+            ctx.translate(wobbleX, wobbleY);
+
+            ctx.fillStyle = '#cc5500'; 
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Equator (rotation)
+            ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            const tilt = fieldUp ? 1 : -1;
+            ctx.ellipse(0, 0, radius, 8, 0, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Moving dots
+            rotationAngle += fieldUp ? 0.05 : -0.05;
+            for(let i=0; i<3; i++) {
+                let angle = rotationAngle + (i * Math.PI * 2 / 3);
+                let dotX = Math.cos(angle) * radius;
+                let dotY = Math.sin(angle) * 8 * tilt;
+                if(Math.sin(angle) > 0) { 
+                    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+                    ctx.beginPath();
+                    ctx.arc(dotX, dotY, 3, 0, Math.PI*2);
+                    ctx.fill();
+                }
+            }
+            
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('⁶⁰Co', 0, 0);
+            
+            ctx.restore();
+        }
+
+        function emitElectron(centerX, realCenterY, isSplitMode) {
+            if (Math.random() > 0.05) return;
+
+            let probDown = 0.5;
+
+            if (parityViolated) {
+                let alignment = 1.0 - temperature; 
+                let asymmetryFactor = 0.4; 
+                
+                if (fieldUp) {
+                    probDown = 0.5 + (asymmetryFactor * alignment);
+                } else {
+                    probDown = 0.5 - (asymmetryFactor * alignment);
+                }
+            }
+
+            let emitDown = Math.random() < probDown;
+            let vy = emitDown ? (Math.random() * 3 + 3) : -(Math.random() * 3 + 3);
+            
+            // Generate Real Electron
+            electrons.push(new Electron(centerX, realCenterY, vy, false));
+
+            // Generate Mirror Electron (Simultaneously, with geometrically flipped velocity)
+            if (isSplitMode) {
+                const mirrorCenterY = canvas.height * 0.75;
+                let mirrorVy = -vy; // Vertical velocity flips in a horizontal mirror
+                electrons.push(new Electron(centerX, mirrorCenterY, mirrorVy, true));
+            }
+
+            // Update stats (only based on Real World)
+            if (emitDown) {
+                countDown++;
+                countDownEl.innerText = countDown;
+            } else {
+                countUp++;
+                countUpEl.innerText = countUp;
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawMagneticField();
+
+            const centerX = canvas.width / 2;
+
+            if (showMirror) {
+                const realCenterY = canvas.height * 0.25;
+                drawNucleus(centerX, realCenterY, 'REAL WORLD');
+                
+                const mirrorCenterY = canvas.height * 0.75;
+                drawNucleus(centerX, mirrorCenterY, 'MIRROR WORLD');
+                
+                emitElectron(centerX, realCenterY, true);
+            } else {
+                const centerY = canvas.height / 2;
+                drawNucleus(centerX, centerY, '');
+                emitElectron(centerX, centerY, false);
+            }
+
+            for (let i = electrons.length - 1; i >= 0; i--) {
+                let e = electrons[i];
+                e.update();
+                e.draw(ctx);
+                if (e.life <= 0 || e.y < 0 || e.y > canvas.height) {
+                    electrons.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
